@@ -40,7 +40,7 @@ mod StringCursor {
     pub def eat(s: String, sc: StringCursor[r]): Bool \ r = {
         let len = String.length(s);
         if (peek(len, sc) == s) {
-            take(len, sc);
+            discard take(len, sc);
             true
         } else {
             false

@@ -16,7 +16,7 @@ mod Talpin.EffectSolver {
     }
 
     def collapse(k: Constraint): Constraint = {
-        k |> coerce |> Set.toList |> List.groupBy(x -> y -> fst(x) == fst(y)) |> List.map(
+        k |> coerce |> Set.toList |> List.groupWith(x -> y -> fst(x) == fst(y)) |> List.map(
             group -> {
                 let evar = fst(Nel.head(group));
                 (evar, group |> Nel.map(snd) |> Nel.foldLeft(Effect.Union, Effect.Empty))

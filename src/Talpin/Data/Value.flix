@@ -22,22 +22,22 @@ mod Value {
 
     pub def getRef(v: Value): RefLoc \ Abort = match v {
         case Ref(l) => l
-        case other => Abort.abort("'${other}' is not a ref.")
+        case other => Abort.abort(Formattable.format("'${other}' is not a ref."))
     }
 
     pub def getClosure(v: Value): (Id, Exp, Env) \ Abort = match v {
         case Closure(x, e, env) => (x, e, env())
-        case other => Abort.abort("'${other}' is not a closure.")
+        case other => Abort.abort(Formattable.format("'${other}' is not a closure."))
     }
 
     pub def getBool(v: Value): Bool \ Abort = match v {
         case BoolVal(b) => b
-        case other => Abort.abort("'${other}' is not a bool.")
+        case other => Abort.abort(Formattable.format("'${other}' is not a bool."))
     }
 
     pub def getInt(v: Value): Int32 \ Abort = match v {
         case IntVal(i) => i
-        case other => Abort.abort("'${other}' is not an int.")
+        case other => Abort.abort(Formattable.format("'${other}' is not an int."))
     }
 
     pub def toString(v: Value): String = match v {

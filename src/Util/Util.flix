@@ -11,7 +11,7 @@ mod Util.Util {
 
     pub def keyNotFoundRunWithAbort(f: Unit -> b \ ef): b \ ef - KeyNotFound + Abort =
         run f() with handler KeyNotFound {
-            def keyNotFound(m, _k) = Abort.abort(m)
+            def keyNotFound(m, _k) = Abort.abort(Formattable.format(m))
         }
 
     pub def runAll(f: Unit -> t \ ef): t \ ef - Abort - KeyNotFound - Talpin.FreshName - Talpin.Reconstruction.BinderTypes + IO =
@@ -32,6 +32,6 @@ mod Util.Util {
     pub def fileReadRunWithAbort(f: Unit -> b \ ef): b \ ef - FileRead + {Abort, IO} =
         match FileRead.runWithIO(f) {
             case Ok(v) => v
-            case Err(_ioError) => Abort.abort("IoError")
+            case Err(_ioError) => Abort.abort(Formattable.format("IoError"))
         }
 }

@@ -5,7 +5,7 @@ mod Talpin.RunFile {
     use Talpin.Data.Subst
     use Util.Util
 
-    pub def checkFileArg(): Result[String, Unit] \ IO =
+    pub def checkFileArg(): Result[RichString, Unit] \ IO =
         run {
             match Env.getArgs() {
                 case path :: Nil => checkFile(path)
@@ -29,15 +29,15 @@ mod Talpin.RunFile {
             let p =
                 run Talpin.Parsing.Parser.parse(input)
                 with handler Abort {
-                    def abort(m, _k) = Abort.abort("Parsing Error: ${m}")
+                    def abort(m, _k) = Abort.abort(Formattable.format("Parsing Error: ${m}"))
                 };
             let info =
                 run Reconstruction.reconstructInfo(p)
                 with FreshName.runWithState
                 with handler Abort {
-                    def abort(m, _k) = Abort.abort("Typer Error: ${m}")
+                    def abort(m, _k) = Abort.abort(Formattable.format("Typer Error: ${m}"))
                 } with handler KeyNotFound {
-                    def keyNotFound(msg, _k) = Abort.abort("Typer Error: ${msg}")
+                    def keyNotFound(msg, _k) = Abort.abort(Formattable.format("Typer Error: ${msg}"))
                 };
             info |> Reconstruction.Info.toStrings |> List.forEach(println)
 

@@ -112,7 +112,7 @@ mod Talpin.BigStep {
         let resB = match (v, v1) {
             case (IntVal(i1), IntVal(i2)) => i1 == i2
             case (BoolVal(b1), BoolVal(b2)) => b1 == b2
-            case _ => Abort.abort("'${v}' and '${v1}' cannot be compared with eq")
+            case _ => Abort.abort(Formattable.format("'${v}' and '${v1}' cannot be compared with eq"))
         };
         (BoolVal(resB), f + f1, s1)
     }

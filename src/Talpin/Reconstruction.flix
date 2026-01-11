@@ -303,7 +303,7 @@ mod Talpin.Reconstruction {
         let _q = Effect.Var(qName);
         let z = Effect.Var(freshEVar());
         let _union = z + Effect.Eff(effect);
-        (s, t, z, k + Abort.abort("run not implemented"))
+        (s, t, z, k + Abort.abort(Formattable.format("run not implemented")))
     }
 
     def unify(tpe: Type, tpe1: Type): Subst \ Abort = match (tpe, tpe1) {
@@ -325,7 +325,7 @@ mod Talpin.Reconstruction {
         case (Type.Bool, Type.Bool) => Subst.id()
         case (Type.Int, Type.Int) => Subst.id()
 
-        case (t, t1) => Abort.abort("${t} !~ ${t1}")
+        case (t, t1) => Abort.abort(Formattable.format("${t} !~ ${t1}"))
     }
 
     def freshTVar(): TVar \ FreshName = TVar("t${FreshName.get()}")

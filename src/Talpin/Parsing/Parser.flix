@@ -208,6 +208,6 @@ mod Talpin.Parsing.Parser {
         }
 
     def err(expected: String, rule: String, sc: StringCursor[r]): a \ r + Abort =
-        Abort.abort("(${rule}) expected ${expected} in: '${remaining(sc)}'")
+        Abort.abort(Formattable.format("(${rule}) expected ${expected} in: '${remaining(sc)}'"))
 
 }

@@ -1,10 +1,6 @@
-mod Talpin.Data {
-
-pub type alias TyEnv = Map[Id, TyScheme]
-
-mod TyEnv {
+mod Talpin.Data.TyEnv {
     use Talpin.Data.TyScheme
-    use Talpin.Data.Id
+    use Talpin.Data.{Id, TyEnv}
     use Talpin.Data.Constraint
     use Talpin.Data.Type
     use Talpin.Data.FreeVarSet
@@ -28,7 +24,5 @@ mod TyEnv {
 
     pub def fv(env: TyEnv): FreeVarSet =
         (FreeVarSet.empty(), env) ||> Map.foldLeft(acc -> s -> acc + TyScheme.fv(s))
-
-}
 
 }

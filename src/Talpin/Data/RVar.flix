@@ -1,4 +1,4 @@
-mod Talpin.Data {
+mod Talpin.Data.RVar {
     use Coerce.coerce
 
     pub enum RVar(String) with Eq, Coerce, Order
@@ -7,8 +7,6 @@ mod Talpin.Data {
         pub def toString(x: RVar): String = RVar.toString(x)
     }
 
-    mod RVar {
-        pub def toString(x: RVar): String = coerce(x)
-    }
+    pub def toString(x: RVar): String = coerce(x)
 
 }

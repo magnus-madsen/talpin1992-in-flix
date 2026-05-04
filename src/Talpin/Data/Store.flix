@@ -1,13 +1,9 @@
-mod Talpin.Data {
-
-pub type alias Store = Map[RefLoc, Value]
-
-mod Store {
+mod Talpin.Data.Store {
     use Add.add
     use Functor.map
     use Option.getWithDefault
 
-    use Talpin.Data.RefLoc
+    use Talpin.Data.{RefLoc, Store}
     use Talpin.Data.Value
 
     pub def store(l: RefLoc, v: Value, s: Store): Store =
@@ -21,7 +17,5 @@ mod Store {
 
     pub def empty(): Store =
         Map.empty()
-
-}
 
 }

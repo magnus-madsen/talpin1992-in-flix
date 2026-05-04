@@ -1,19 +1,17 @@
-mod Talpin.Data {
-
-pub enum Trace(Set[RuntimeEffect]) with ToString
-
-instance Coerce[Trace] {
-    type Out = Set[RuntimeEffect]
-
-    pub def coerce(f: Trace): Set[RuntimeEffect] = Trace.coerce(f)
-}
-
-instance Add[Trace] {
-    pub def add(f1: Trace, f2: Trace): Trace = Trace.union(f1, f2)
-}
-
-mod Trace {
+mod Talpin.Data.Trace {
     use Talpin.Data.RuntimeEffect
+
+    pub enum Trace(Set[RuntimeEffect]) with ToString
+
+    instance Coerce[Trace] {
+        type Out = Set[RuntimeEffect]
+
+        pub def coerce(f: Trace): Set[RuntimeEffect] = Trace.coerce(f)
+    }
+
+    instance Add[Trace] {
+        pub def add(f1: Trace, f2: Trace): Trace = Trace.union(f1, f2)
+    }
 
     pub def empty(): Trace = Set.empty() |> Trace
 
@@ -35,7 +33,5 @@ mod Trace {
     pub def remove(ef: RuntimeEffect, f: Trace): Trace = {
         f |> coerceMap(Set.remove(ef))
     }
-
-}
 
 }

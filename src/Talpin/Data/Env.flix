@@ -1,26 +1,24 @@
-mod Talpin.Data {
+mod Talpin.Data.Env {
     use Coerce.coerce
 
-pub enum Env(Map[Id, Value])
-
-instance Indexable[Env] {
-    type Idx = Id
-    type Elm = Value
-    type Aef = KeyNotFound
-
-    pub def get(env: Env, id: Id): Value \ KeyNotFound = Env.lookup(id, env)
-}
-
-instance Coerce[Env] {
-    type Out = Map[Id, Value]
-
-    pub def coerce(env: Env): Map[Id, Value] = Env.coerce(env)
-}
-
-
-mod Env {
     use Talpin.Data.Id
     use Talpin.Data.Value
+
+    pub enum Env(Map[Id, Value])
+
+    instance Indexable[Env] {
+        type Idx = Id
+        type Elm = Value
+        type Aef = KeyNotFound
+
+        pub def get(env: Env, id: Id): Value \ KeyNotFound = Env.lookup(id, env)
+    }
+
+    instance Coerce[Env] {
+        type Out = Map[Id, Value]
+
+        pub def coerce(env: Env): Map[Id, Value] = Env.coerce(env)
+    }
 
     pub def empty(): Env =
         Env(Map.empty())
@@ -45,7 +43,5 @@ mod Env {
 
     pub def bind(id: Id, v: Value, env: Env): Env =
         env |> coerceMap(Map.insert(id, v))
-
-}
 
 }

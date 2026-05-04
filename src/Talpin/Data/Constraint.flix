@@ -1,20 +1,18 @@
-mod Talpin.Data {
-
-pub enum Constraint(Set[(EVar, Effect)]) with Coerce
-
-instance ToString[Constraint] {
-    pub def toString(k: Constraint): String = Constraint.toString(k)
-}
-
-
-instance Add[Constraint] {
-    pub def add(k1: Constraint, k2: Constraint): Constraint = Constraint.combine(k1, k2)
-}
-
-mod Constraint {
+mod Talpin.Data.Constraint {
     use Talpin.Data.Effect
     use Talpin.Data.FreeVarSet
     use Talpin.Data.EVar
+
+    pub enum Constraint(Set[(EVar, Effect)]) with Coerce
+
+    instance ToString[Constraint] {
+        pub def toString(k: Constraint): String = Constraint.toString(k)
+    }
+
+
+    instance Add[Constraint] {
+        pub def add(k1: Constraint, k2: Constraint): Constraint = Constraint.combine(k1, k2)
+    }
 
     pub def empty(): Constraint =
         Constraint(Set.empty())
@@ -48,7 +46,5 @@ mod Constraint {
 
     pub def toStrings(k: Constraint): List[String] =
         k |> coerce |> Set.toList |> List.map(match (x, y) -> "${x} ⊒ ${y}")
-
-}
 
 }

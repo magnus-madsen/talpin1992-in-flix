@@ -1,23 +1,22 @@
-mod Talpin.Data {
-
-pub enum Type {
-    case Unitt
-    case Var(TVar)
-    case Ref(Reg, Type)
-    case Arrow(Type, Effect, Type)
-
-    case Bool
-    case Int
-}
-
-instance ToString[Type] {
-    pub def toString(t: Type): String = Type.toString(t)
-}
-
-mod Type {
+mod Talpin.Data.Type {
     use Talpin.Data.Effect
     use Talpin.Data.FreeVarSet
     use Talpin.Data.Reg
+    use Talpin.Data.TVar
+
+    pub enum Type {
+        case Unitt
+        case Var(TVar)
+        case Ref(Reg, Type)
+        case Arrow(Type, Effect, Type)
+
+        case Bool
+        case Int
+    }
+
+    instance ToString[Type] {
+        pub def toString(t: Type): String = Type.toString(t)
+    }
 
     pub def toString(tpe: Type): String = match tpe {
         case Unitt => "unit"
@@ -51,7 +50,5 @@ mod Type {
         case Bool => Bool
         case Int => Int
     }
-
-}
 
 }

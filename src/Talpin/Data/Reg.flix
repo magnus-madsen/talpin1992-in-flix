@@ -1,17 +1,16 @@
-mod Talpin.Data {
-
-// Region is already used in Flix
-pub enum Reg with Eq, Order {
-    case RegConst(Int32)
-    case RegVar(RVar)
-}
-
-instance ToString[Reg] {
-    pub def toString(p: Reg): String = Reg.toString(p)
-}
-
-mod Reg {
+mod Talpin.Data.Reg {
     use Talpin.Data.FreeVarSet
+    use Talpin.Data.RVar
+
+    // Region is already used in Flix
+    pub enum Reg with Eq, Order {
+        case RegConst(Int32)
+        case RegVar(RVar)
+    }
+
+    instance ToString[Reg] {
+        pub def toString(p: Reg): String = Reg.toString(p)
+    }
 
     pub def toString(p: Reg): String = match p {
         case RegConst(i) => "cst#${i}"
@@ -22,7 +21,5 @@ mod Reg {
         case RegConst(_) => FreeVarSet.empty()
         case RegVar(x) => FreeVarSet.singleRVar(x)
     }
-
-}
 
 }

@@ -1,29 +1,27 @@
-mod Talpin.Data {
-
-pub enum FreeVarSet {
-    case Sets(Set[TVar], Set[RVar], Set[EVar])
-    case Empty
-}
-
-instance Add[FreeVarSet] {
-    pub def add(fv: FreeVarSet, fv1: FreeVarSet): FreeVarSet = FreeVarSet.union(fv, fv1)
-}
-
-instance Sub[FreeVarSet] {
-    pub def sub(fv: FreeVarSet, fv1: FreeVarSet): FreeVarSet = FreeVarSet.difference(fv, fv1)
-}
-
-instance Coerce[FreeVarSet] {
-    type Out = {tVars = Set[TVar], rVars = Set[RVar], eVars = Set[EVar]}
-
-    pub def coerce(fv: FreeVarSet): {tVars = Set[TVar], rVars = Set[RVar], eVars = Set[EVar]} = FreeVarSet.coerce(fv)
-}
-
-
-mod FreeVarSet {
+mod Talpin.Data.FreeVarSet {
     use Talpin.Data.TVar
     use Talpin.Data.RVar
     use Talpin.Data.EVar
+
+    pub enum FreeVarSet {
+        case Sets(Set[TVar], Set[RVar], Set[EVar])
+        case Empty
+    }
+
+    instance Add[FreeVarSet] {
+        pub def add(fv: FreeVarSet, fv1: FreeVarSet): FreeVarSet = FreeVarSet.union(fv, fv1)
+    }
+
+    instance Sub[FreeVarSet] {
+        pub def sub(fv: FreeVarSet, fv1: FreeVarSet): FreeVarSet = FreeVarSet.difference(fv, fv1)
+    }
+
+    instance Coerce[FreeVarSet] {
+        type Out = {tVars = Set[TVar], rVars = Set[RVar], eVars = Set[EVar]}
+
+        pub def coerce(fv: FreeVarSet): {tVars = Set[TVar], rVars = Set[RVar], eVars = Set[EVar]} = FreeVarSet.coerce(fv)
+    }
+
     pub def empty(): FreeVarSet =
         Empty
 
@@ -85,7 +83,5 @@ mod FreeVarSet {
         case (Sets(_, _, _), Empty) => fv
         case (Empty, _) => Empty
     }
-
-}
 
 }

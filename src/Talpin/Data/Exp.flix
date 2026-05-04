@@ -1,39 +1,37 @@
-mod Talpin.Data {
+mod Talpin.Data.Exp {
 
-pub enum Exp {
-    /// x
-    case Var(String)
-    /// (e e')
-    case App(Exp, Exp)
-    /// (lambda (x) e)
-    case Abs(String, Exp)
-    /// (rec (f x) e)
-    case Rec(String, String, Exp)
-    /// (let (x e) e')
-    case Let(String, Exp, Exp)
-    /// (new e)
-    case New(Exp)
-    /// (get e)
-    case Get(Exp)
-    /// (set e e')
-    case Set(Exp, Exp)
+    pub enum Exp {
+        /// x
+        case Var(String)
+        /// (e e')
+        case App(Exp, Exp)
+        /// (lambda (x) e)
+        case Abs(String, Exp)
+        /// (rec (f x) e)
+        case Rec(String, String, Exp)
+        /// (let (x e) e')
+        case Let(String, Exp, Exp)
+        /// (new e)
+        case New(Exp)
+        /// (get e)
+        case Get(Exp)
+        /// (set e e')
+        case Set(Exp, Exp)
 
-    case BoolCst(Bool)
-    case If(Exp, Exp, Exp)
-    case IntCst(Int32)
-    case Add(Exp, Exp)
-    case Sub(Exp, Exp)
-    case Eq(Exp, Exp)
+        case BoolCst(Bool)
+        case If(Exp, Exp, Exp)
+        case IntCst(Int32)
+        case Add(Exp, Exp)
+        case Sub(Exp, Exp)
+        case Eq(Exp, Exp)
 
-    case Do(String)
-    case Run(Exp, String)
-}
+        case Do(String)
+        case Run(Exp, String)
+    }
 
-instance ToString[Exp] {
-    pub def toString(e: Exp): String = Exp.toString(e)
-}
-
-mod Exp {
+    instance ToString[Exp] {
+        pub def toString(e: Exp): String = Exp.toString(e)
+    }
 
     pub def expansive(exp: Exp): Bool = match exp {
         case Rec(_, _, _) => false
@@ -80,7 +78,5 @@ mod Exp {
         case Do(e) => "(do ${e})"
         case Run(e, ef) => "(run ${e} ${ef})"
     }
-
-}
 
 }

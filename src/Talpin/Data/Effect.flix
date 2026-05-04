@@ -1,30 +1,29 @@
-mod Talpin.Data {
-
-pub enum Effect with Eq, Order {
-    case Empty
-    case Init(Reg)
-    case Read(Reg)
-    case Write(Reg)
-    case Union(Effect, Effect)
-    case Var(EVar)
-
-    case Eff(String)
-}
-
-instance ToString[Effect] {
-    pub def toString(ef: Effect): String = Effect.toString(ef)
-}
-
-instance Add[Effect] {
-    pub def add(ef1: Effect, ef2: Effect): Effect = Effect.Union(ef1, ef2)
-}
-
-mod Effect {
+mod Talpin.Data.Effect {
     use Talpin.Data.FreeVarSet
     use Talpin.Data.Reg
+    use Talpin.Data.EVar
 
     use Functor.map
     use Option.getWithDefault
+
+    pub enum Effect with Eq, Order {
+        case Empty
+        case Init(Reg)
+        case Read(Reg)
+        case Write(Reg)
+        case Union(Effect, Effect)
+        case Var(EVar)
+
+        case Eff(String)
+    }
+
+    instance ToString[Effect] {
+        pub def toString(ef: Effect): String = Effect.toString(ef)
+    }
+
+    instance Add[Effect] {
+        pub def add(ef1: Effect, ef2: Effect): Effect = Effect.Union(ef1, ef2)
+    }
 
     pub def toString(effect: Effect): String = match effect {
         case Empty => "Ø"
@@ -89,7 +88,5 @@ mod Effect {
 
         case Eff(s) => if (toRemove#toRemove == Eff(s)) Empty else Eff(s)
     }
-
-}
 
 }

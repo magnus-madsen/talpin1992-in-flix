@@ -1,23 +1,24 @@
-mod Talpin.Data {
-
-pub enum TyScheme({
-    tVars = Set[TVar],
-    rVars = Set[RVar],
-    eVars = Set[EVar],
-    tpe = Type,
-    k = Constraint
-}) with Coerce
-
-instance ToString[TyScheme] {
-    pub def toString(x: TyScheme): String = TyScheme.toString(x)
-}
-
-mod TyScheme {
+mod Talpin.Data.TyScheme {
     use Coerce.coerce
     use Talpin.Data.Type
     use Talpin.Data.Constraint
     use Talpin.Data.FreeVarSet
+    use Talpin.Data.TVar
+    use Talpin.Data.RVar
+    use Talpin.Data.EVar
     use Talpin.Data.TyScheme.TyScheme
+
+    pub enum TyScheme({
+        tVars = Set[TVar],
+        rVars = Set[RVar],
+        eVars = Set[EVar],
+        tpe = Type,
+        k = Constraint
+    }) with Coerce
+
+    instance ToString[TyScheme] {
+        pub def toString(x: TyScheme): String = TyScheme.toString(x)
+    }
 
     pub def fromType(t: Type): TyScheme = TyScheme({
         tVars = Set.empty(),
@@ -58,7 +59,5 @@ mod TyScheme {
         let {tVars, rVars, eVars, tpe, k} = coerce(s);
         TyScheme({tVars = tVars, rVars = rVars, eVars = eVars, tpe = tpe |> Type.simplify, k = k |> Constraint.simplify})
     }
-
-}
 
 }

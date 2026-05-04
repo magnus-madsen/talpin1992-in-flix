@@ -1,5 +1,2 @@
-mod Talpin.Data {
-
-pub type alias Id = String
-
+mod Talpin.Data.Id {
 }

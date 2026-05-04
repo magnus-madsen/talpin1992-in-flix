@@ -1,24 +1,21 @@
-mod Talpin.Data {
-
-pub enum Value {
-    case U
-    case Ref(RefLoc)
-    case Closure(Id, Exp, Unit -> Env)
-
-    case BoolVal(Bool)
-    case IntVal(Int32)
-}
-
-instance ToString[Value] {
-    pub def toString(v: Value): String = Value.toString(v)
-}
-
-
-mod Value {
+mod Talpin.Data.Value {
     use Talpin.Data.Id
     use Talpin.Data.Exp
     use Talpin.Data.Env
     use Talpin.Data.RefLoc
+
+    pub enum Value {
+        case U
+        case Ref(RefLoc)
+        case Closure(Id, Exp, Unit -> Env)
+
+        case BoolVal(Bool)
+        case IntVal(Int32)
+    }
+
+    instance ToString[Value] {
+        pub def toString(v: Value): String = Value.toString(v)
+    }
 
     pub def getRef(v: Value): RefLoc \ Abort = match v {
         case Ref(l) => l
@@ -47,7 +44,5 @@ mod Value {
         case BoolVal(b) => "${b}"
         case IntVal(i) => "${i}"
     }
-
-}
 
 }

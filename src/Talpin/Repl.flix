@@ -19,12 +19,15 @@ mod Talpin.Repl {
     } with Console.runWithIO
 
     def loop(): Unit \ IO + Console = {
-        let input = Console.readln();
-        if (input == ":exit" or input == ":quit" or input == ":q")
-            ()
-        else {
-            typeInput(input);
-            loop()
+        match Console.readln() {
+            case None        => ()
+            case Some(input) =>
+                if (input == ":exit" or input == ":quit" or input == ":q")
+                    ()
+                else {
+                    typeInput(input);
+                    loop()
+                }
         }
     }
 

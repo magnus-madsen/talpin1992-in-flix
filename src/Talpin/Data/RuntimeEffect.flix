@@ -1,4 +1,4 @@
-mod Talpin.Data.RuntimeEffect {
+pub mod Talpin.Data.RuntimeEffect {
     use Talpin.Data.RefLoc
 
     pub enum RuntimeEffect with Eq, Order, ToString {

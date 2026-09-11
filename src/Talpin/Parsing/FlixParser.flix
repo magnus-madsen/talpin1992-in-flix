@@ -1,4 +1,4 @@
-mod Talpin.Parsing.FlixParser {
+pub mod Talpin.Parsing.FlixParser {
     use Talpin.Data.Exp
     use Utils.StringCursor
     use Utils.StringCursor.peekChar

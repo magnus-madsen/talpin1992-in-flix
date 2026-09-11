@@ -1,4 +1,4 @@
-mod Utils.Utils {
+pub mod Utils.Utils {
     import java.lang.System
 
     pub def abortRunWithCrash(f: Unit -> b \ ef): b \ ef - Abort + IO =

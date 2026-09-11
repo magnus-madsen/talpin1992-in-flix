@@ -1,4 +1,4 @@
-mod Talpin.Data.Value {
+pub mod Talpin.Data.Value {
     use Talpin.Data.Id
     use Talpin.Data.Exp
     use Talpin.Data.Env

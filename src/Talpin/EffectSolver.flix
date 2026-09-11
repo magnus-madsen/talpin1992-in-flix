@@ -1,4 +1,4 @@
-mod Talpin.EffectSolver {
+pub mod Talpin.EffectSolver {
     use Talpin.Data.Constraint
     use Talpin.Data.Type
     use Talpin.Data.Effect

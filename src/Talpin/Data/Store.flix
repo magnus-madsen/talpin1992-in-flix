@@ -1,4 +1,4 @@
-mod Talpin.Data.Store {
+pub mod Talpin.Data.Store {
     use Add.add
     use Functor.map
     use Option.getWithDefault

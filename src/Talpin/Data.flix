@@ -1,4 +1,4 @@
-mod Talpin.Data {
+pub mod Talpin.Data {
     use Talpin.Data.RefLoc
     use Talpin.Data.Value
     use Talpin.Data.Id

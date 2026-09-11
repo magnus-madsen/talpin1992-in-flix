@@ -1,4 +1,4 @@
-mod Talpin.Data.Env {
+pub mod Talpin.Data.Env {
     use Coerce.coerce
 
     use Talpin.Data.Id

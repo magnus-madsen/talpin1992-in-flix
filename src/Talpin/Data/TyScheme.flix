@@ -1,4 +1,4 @@
-mod Talpin.Data.TyScheme {
+pub mod Talpin.Data.TyScheme {
     use Coerce.coerce
     use Talpin.Data.Type
     use Talpin.Data.Constraint

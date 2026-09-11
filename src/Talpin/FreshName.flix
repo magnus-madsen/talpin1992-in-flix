@@ -1,11 +1,6 @@
-mod Talpin {
-
-pub eff FreshName {
-    def get(): Int32
-}
-
-mod FreshName {
+pub mod Talpin.FreshName {
     use Add.add
+    use Talpin.FreshName
 
     pub def handleWithState(f: a -> b \ ef): a -> b \ ef - FreshName =
         x -> runWithState(() -> f(x))
@@ -21,5 +16,4 @@ mod FreshName {
         }
     }
 
-}
 }

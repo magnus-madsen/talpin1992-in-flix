@@ -1,4 +1,4 @@
-mod Talpin.Data.TyEnv {
+pub mod Talpin.Data.TyEnv {
     use Talpin.Data.TyScheme
     use Talpin.Data.{Id, TyEnv}
     use Talpin.Data.Constraint

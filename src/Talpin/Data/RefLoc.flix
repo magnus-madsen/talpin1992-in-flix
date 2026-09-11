@@ -1,2 +1,2 @@
-mod Talpin.Data.RefLoc {
+pub mod Talpin.Data.RefLoc {
 }

@@ -1,4 +1,4 @@
-mod Talpin.Data.TVar {
+pub mod Talpin.Data.TVar {
     use Coerce.coerce
 
     pub enum TVar(String) with Eq, Coerce, Order

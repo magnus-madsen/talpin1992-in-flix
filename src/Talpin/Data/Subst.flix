@@ -1,4 +1,4 @@
-mod Talpin.Data.Subst {
+pub mod Talpin.Data.Subst {
     use Option.getWithDefault
 
     use Talpin.Data.Type

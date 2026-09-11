@@ -1,2 +1,2 @@
-mod Talpin.Data.Id {
+pub mod Talpin.Data.Id {
 }

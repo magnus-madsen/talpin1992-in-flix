@@ -1,4 +1,4 @@
-mod Talpin.Examples {
+pub mod Talpin.Examples {
     use Talpin.BigStep.eval
     use Talpin.Data.Constraint
     use Talpin.Data.Effect

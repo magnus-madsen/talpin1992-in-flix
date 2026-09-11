@@ -1,4 +1,4 @@
-mod Talpin.Reconstruction {
+pub mod Talpin.Reconstruction {
     use Talpin.Data.Constraint
     use Talpin.Data.Constraint.constraint
     use Talpin.Data.Effect
@@ -43,57 +43,6 @@ mod Talpin.Reconstruction {
         solvedSubst = Subst
     }
 
-    mod Info {
-        use Functor.map
-        use Talpin.Data.Constraint
-        use Talpin.Data.Subst
-
-        pub def toStrings(i: Info): List[String] = region local {
-            use ToString.toString;
-            let {
-                exp,
-                tpe,
-                effect,
-                binders,
-                preEffTpe,
-                preEffEffect,
-                constraints,
-                preEffSubst,
-                preEffBinders,
-                solvedSubst
-            } = i;
-            let l = MutList.empty(local);
-            def add(title, content, start, end) = l |> MutList.push(Some((title, content, start, end)));
-            def addOne(title, content) = l |> MutList.push(Some((title, List#{content}, "", "")));
-            def addEmpty() = l |> MutList.push(None);
-            addOne("Exp", exp |> toString);
-            addOne("Type", tpe |> toString);
-            addOne("Effect", effect |> toString);
-            add("Binders", binders |> map(match (x, sigma) -> "${x}: ${sigma}") |> Vector.toList, "{", "}");
-            addEmpty();
-            addOne("(PreEff) Tpe", preEffTpe |> toString);
-            addOne("(PreEff) Effect", preEffEffect |> toString);
-            add("(PreEff) Constraints", constraints |> Constraint.toStrings, "{", "}");
-            add("(PreEff) Subst", preEffSubst |> Subst.toStrings, "[", "]");
-            add("(PreEff) Binders", preEffBinders |> map(match (x, sigma) -> "${x}: ${sigma}") |> Vector.toList, "{", "}");
-            addEmpty();
-            add("(Solved) Subst", solvedSubst |> Subst.toStrings, "[", "]");
-
-            let maxFirst = l |> MutList.map(local, Option.map(match (x, _, _, _) -> String.length(x)) >> Option.getWithDefault(0)) |> MutList.maximum |> Option.getWithDefault(0);
-            let indent = String.repeat(maxFirst+6, " ");
-            l |> MutList.toList |> List.flatMap(line -> match line {
-                case None => List#{""}
-                case Some((title, content, start, end)) =>
-                    let paddedTitle = String.padRight(maxFirst+2, '.', title);
-                    match content {
-                        case Nil => List#{"${paddedTitle}: ${start}${end}"}
-                        case one :: Nil => List#{"${paddedTitle}: ${start}${one}${end}"}
-                        case many => "${paddedTitle}: ${start}" :: map(String.concat(indent), many) ::: List#{String.concat(String.padLeft(maxFirst+2, ' ', ""), "  ${end}")}
-                    }
-            })
-        }
-    }
-
     pub def reconstructInfo(exp: Exp): Info \ {Abort, KeyNotFound} = {
         let ((s, t, ef, k), binders) = run Reconstruction.reconstruct(exp) with FreshName.runWithState with Reconstruction.BinderTypes.runWithList;
         let s1 = EffectSolver.solv(k);
@@ -116,33 +65,6 @@ mod Talpin.Reconstruction {
 
     pub eff BinderTypes {
         def typed(x: String, t: TyScheme): Unit
-    }
-
-    mod BinderTypes {
-        use Talpin.Data.Type
-        use Talpin.Data.TyScheme
-
-        pub def handleWithNothing(f: a -> b \ ef): a -> b \ ef - BinderTypes =
-            x -> runWithNothing(() -> f(x))
-
-        pub def runWithNothing(f: Unit -> b \ ef): b \ ef - BinderTypes =
-            run f() with handler BinderTypes { def typed(_x, _t, k) = k() }
-
-        pub def handleWithList(f: a -> b \ ef): a -> (b, Vector[(String, TyScheme)]) \ ef - BinderTypes =
-            x -> runWithList(() -> f(x))
-
-        pub def runWithList(f: Unit -> b \ ef): (b, Vector[(String, TyScheme)]) \ ef - BinderTypes =
-            region local {
-                let types = MutList.empty(local);
-                run {
-                    (f(), MutList.toVector(types))
-                } with handler BinderTypes {
-                    def typed(x, t, k) = {
-                        MutList.push((x, t), types);
-                        k()
-                    }
-                }
-            }
     }
 
     pub def reconstruct(exp: Exp): (Subst, Type, Effect, Constraint) \ {Abort, BinderTypes, FreshName, KeyNotFound} = {

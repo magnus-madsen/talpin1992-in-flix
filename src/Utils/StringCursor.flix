@@ -1,13 +1,6 @@
-mod Utils {
-
-pub struct StringCursor[r] {
-    mut p: Int32,
-    s: String,
-    eof: Char
-}
-
-mod StringCursor {
+pub mod Utils.StringCursor {
     use ToString.toString
+    use Utils.StringCursor
 
     pub def mk(rc: Region[r], eof: Char, s: String): StringCursor[r] \ r =
         new StringCursor @ rc {p = 0, s = s, eof = eof}
@@ -79,7 +72,5 @@ mod StringCursor {
 
     def inBounds(idx: Int32, sc: StringCursor[r]): Bool =
         idx < String.length(sc->s)
-
-}
 
 }

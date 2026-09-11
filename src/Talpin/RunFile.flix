@@ -1,4 +1,4 @@
-mod Talpin.RunFile {
+pub mod Talpin.RunFile {
     use Talpin.FreshName
     use Talpin.Reconstruction
     use Talpin.EffectSolver

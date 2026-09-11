@@ -1,4 +1,4 @@
-mod Talpin.Data.Type {
+pub mod Talpin.Data.Type {
     use Talpin.Data.Effect
     use Talpin.Data.FreeVarSet
     use Talpin.Data.Reg

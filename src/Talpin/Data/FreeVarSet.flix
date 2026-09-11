@@ -1,4 +1,4 @@
-mod Talpin.Data.FreeVarSet {
+pub mod Talpin.Data.FreeVarSet {
     use Talpin.Data.TVar
     use Talpin.Data.RVar
     use Talpin.Data.EVar

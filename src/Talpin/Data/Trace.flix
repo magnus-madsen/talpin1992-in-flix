@@ -1,4 +1,4 @@
-mod Talpin.Data.Trace {
+pub mod Talpin.Data.Trace {
     use Talpin.Data.RuntimeEffect
 
     pub enum Trace(Set[RuntimeEffect]) with ToString

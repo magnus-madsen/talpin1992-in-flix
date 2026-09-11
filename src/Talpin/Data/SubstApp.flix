@@ -1,4 +1,4 @@
-mod Talpin.Data.SubstApp {
+pub mod Talpin.Data.SubstApp {
     use Talpin.Data.Subst
     use Talpin.Data.Type
     use Talpin.Data.Reg

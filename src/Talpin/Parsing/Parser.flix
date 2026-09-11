@@ -1,4 +1,4 @@
-mod Talpin.Parsing.Parser {
+pub mod Talpin.Parsing.Parser {
     use Talpin.Data.Exp
     use Utils.StringCursor
     use Utils.StringCursor.peekChar

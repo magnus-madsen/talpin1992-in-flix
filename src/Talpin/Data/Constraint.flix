@@ -1,4 +1,4 @@
-mod Talpin.Data.Constraint {
+pub mod Talpin.Data.Constraint {
     use Talpin.Data.Effect
     use Talpin.Data.FreeVarSet
     use Talpin.Data.EVar

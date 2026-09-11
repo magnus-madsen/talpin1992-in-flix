@@ -1,4 +1,4 @@
-mod Talpin.Repl {
+pub mod Talpin.Repl {
     use Talpin.Parsing.Parser
     use Talpin.Reconstruction
     use Talpin.Data.Type

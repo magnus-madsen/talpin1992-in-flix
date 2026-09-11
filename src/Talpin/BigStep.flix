@@ -1,4 +1,4 @@
-mod Talpin.BigStep {
+pub mod Talpin.BigStep {
     use Talpin.Data.Env
     use Talpin.Data.Env.{bind, unbind}
     use Talpin.Data.Exp

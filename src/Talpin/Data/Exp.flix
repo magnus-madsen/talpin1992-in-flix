@@ -1,4 +1,4 @@
-mod Talpin.Data.Exp {
+pub mod Talpin.Data.Exp {
 
     pub enum Exp {
         /// x

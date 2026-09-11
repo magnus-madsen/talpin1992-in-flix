@@ -1,4 +1,4 @@
-mod Talpin.Data.Reg {
+pub mod Talpin.Data.Reg {
     use Talpin.Data.FreeVarSet
     use Talpin.Data.RVar
 
